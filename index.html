@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>reefbox — Creator, Game Dev & Music Hub</title>
+    <meta name="description" content="reefbox kişisel hub: Oyunlar, uygulamalar, YouTube eğitim ve oyun videoları, müzikler ve sosyal medya içerikleri tek bir çatı altında.">
+
+    <!-- Google Fonts: Plus Jakarta Sans & Syne -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- CSS Stilleri -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ARKA PLAN GÖRSEL PARILTILARI -->
+    <div class="ambient-glow glow-1"></div>
+    <div class="ambient-glow glow-2"></div>
+    <div class="ambient-glow glow-3"></div>
+
+    <!-- ÜST NAVİGASYON VE LOGO (STICKY HEADER) -->
+    <header class="site-header">
+        <div class="header-container">
+            <!-- LOGO: reefbox Özel Vektörel SVG -->
+            <a href="#home" class="brand-logo" id="brand-link">
+                <div class="logo-icon-wrapper">
+                    <svg class="reefbox-svg-logo" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="reefGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#00f2fe" />
+                                <stop offset="50%" stop-color="#4facfe" />
+                                <stop offset="100%" stop-color="#000" stop-opacity="0.8"/>
+                            </linearGradient>
+                            <linearGradient id="reefGrad2" x1="0%" y1="100%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="#0052d4" />
+                                <stop offset="100%" stop-color="#4364f7" />
+                            </linearGradient>
+                            <linearGradient id="coreGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#38ef7d" />
+                                <stop offset="100%" stop-color="#11998e" />
+                            </linearGradient>
+                            <filter id="neonGlow" x="-20%" y="-20%" width="140%" height="140%">
+                                <feGaussianBlur stdDeviation="3" result="blur" />
+                                <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                            </filter>
+                        </defs>
+                        <!-- İzometrik Küp / Kutu Yüzeyleri -->
+                        <polygon points="50,15 82,32 50,49 18,32" fill="url(#reefGrad1)" stroke="#38bdf8" stroke-width="1.5" />
+                        <polygon points="18,32 50,49 50,85 18,68" fill="#09182a" stroke="#0284c7" stroke-width="1.5" />
+                        <polygon points="50,49 82,32 82,68 50,85" fill="url(#reefGrad2)" stroke="#38bdf8" stroke-width="1.5" />
+                        <!-- İç Işıltı Çekirdeği (Reef Core) -->
+                        <circle cx="50" cy="49" r="6" fill="url(#coreGlow)" filter="url(#neonGlow)" />
+                        <!-- Dijital Mercan Çizgileri -->
+                        <path d="M50 49 L34 57 M50 49 L66 41 M50 49 L50 31" stroke="#38ef7d" stroke-width="2" stroke-linecap="round" />
+                    </svg>
+                </div>
+                <div class="brand-text">
+                    <span class="brand-name">reef<span class="brand-highlight">box</span></span>
+                    <span class="brand-status"><span class="status-dot"></span> LIVE HUB</span>
+                </div>
+            </a>
+
+            <!-- SEKME BUTONLARI (TABS) -->
+            <nav class="nav-tabs" role="tablist">
+                <button class="tab-btn active" data-tab="home" role="tab" aria-selected="true">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Ana Sayfa</span>
+                </button>
+                <button class="tab-btn" data-tab="games" role="tab" aria-selected="false">
+                    <i class="fa-solid fa-gamepad"></i>
+                    <span>Oyunlar & Uygulamalar</span>
+                </button>
+                <button class="tab-btn" data-tab="videos" role="tab" aria-selected="false">
+                    <i class="fa-solid fa-play"></i>
+                    <span>Videolar & Eğitimler</span>
+                </button>
+                <button class="tab-btn" data-tab="music" role="tab" aria-selected="false">
+                    <i class="fa-solid fa-headphones"></i>
+                    <span>Müzikler</span>
+                </button>
+                <button class="tab-btn" data-tab="socials" role="tab" aria-selected="false">
+                    <i class="fa-solid fa-satellite-dish"></i>
+                    <span>Sosyal Medya</span>
+                </button>
+            </nav>
+
+            <!-- SAĞ KISIM: Mini Çalar Durum Rozeti -->
+            <div class="header-actions">
+                <button class="mini-music-badge" id="header-music-btn" title="Müzik Çaları Aç/Kapat">
+                    <div class="sound-wave-icon">
+                        <span></span><span></span><span></span><span></span>
+                    </div>
+                    <span id="header-music-title">Müzik Çalar</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ANA İÇERİK ALANI (SEKMELİ YAPI) -->
+    <main class="main-container">
+
+        <!-- ============================================== -->
+        <!-- SEKME 1: ANA SAYFA (VİTRİN & ÖZET)             -->
+        <!-- ============================================== -->
+        <section id="tab-home" class="tab-panel active">
+            <!-- HERO BÖLÜMÜ -->
+            <div class="hero-card glass-panel">
+                <div class="hero-content">
+                    <div class="hero-badge">
+                        <i class="fa-solid fa-cube"></i> KİŞİSEL İÇERİK & PORTFOLYO HUB
+                    </div>
+                    <h1 class="hero-title">
+                        Oyunlar, Müzikler ve Kodlar.<br>
+                        <span class="gradient-text">Her Şey Tek Bir Kutuda.</span>
+                    </h1>
+                    <p class="hero-description" id="hero-bio">
+                        Geliştirdiğim indie oyunlar, WebGL demoları, YouTube oyun ve yazılım eğitimleri, bestelediğim synthwave parçalar ve sosyal paylaşımlarım. Dışarıya yönlendirme yok; tüm içerikler doğrudan sitenin içinde gömülü!
+                    </p>
+                    <div class="hero-actions">
+                        <button class="btn btn-primary" onclick="switchTab('games')">
+                            <i class="fa-solid fa-gamepad"></i> Oyunları Oyna
+                        </button>
+                        <button class="btn btn-secondary" onclick="switchTab('videos')">
+                            <i class="fa-solid fa-circle-play"></i> Videoları İzle
+                        </button>
+                        <button class="btn btn-glass" onclick="playFeaturedMusic()">
+                            <i class="fa-solid fa-music"></i> Müzikleri Dinle
+                        </button>
+                    </div>
+                </div>
+                <div class="hero-stats-grid">
+                    <div class="stat-card glass-subpanel">
+                        <div class="stat-icon"><i class="fa-solid fa-dice-d20"></i></div>
+                        <div class="stat-number" id="stat-projects-count">4+</div>
+                        <div class="stat-label">Oyun & Uygulama</div>
+                    </div>
+                    <div class="stat-card glass-subpanel">
+                        <div class="stat-icon"><i class="fa-brands fa-youtube"></i></div>
+                        <div class="stat-number" id="stat-videos-count">10+</div>
+                        <div class="stat-label">Video & Eğitim</div>
+                    </div>
+                    <div class="stat-card glass-subpanel">
+                        <div class="stat-icon"><i class="fa-solid fa-headphones"></i></div>
+                        <div class="stat-number" id="stat-tracks-count">4</div>
+                        <div class="stat-label">Orijinal Parça</div>
+                    </div>
+                    <div class="stat-card glass-subpanel">
+                        <div class="stat-icon"><i class="fa-solid fa-bolt"></i></div>
+                        <div class="stat-number">100%</div>
+                        <div class="stat-label">Sitede Gömülü</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ÖNE ÇIKANLAR IZGARASI (FEATURED SHOWCASE) -->
+            <div class="section-title-wrap">
+                <h2 class="section-title"><i class="fa-solid fa-fire"></i> Öne Çıkan İçerikler</h2>
+                <p class="section-subtitle">En son geliştirdiğim oyunlar, eğitici videolar ve müzik parçaları</p>
+            </div>
+
+            <div class="featured-grid">
+                <!-- Öne Çıkan Oyun Vitrini -->
+                <div class="featured-card glass-panel" id="home-featured-game">
+                    <div class="card-badge"><i class="fa-solid fa-star"></i> ÖNE ÇIKAN OYUN</div>
+                    <div class="featured-cover-wrap">
+                        <img src="" alt="Oyun Kapağı" class="featured-cover" id="home-game-cover">
+                        <div class="cover-overlay">
+                            <button class="play-overlay-btn" id="home-play-game-btn">
+                                <i class="fa-solid fa-gamepad"></i> Hemen Oyna (Gömülü)
+                            </button>
+                        </div>
+                    </div>
+                    <div class="featured-info">
+                        <div class="tags-row" id="home-game-tags"></div>
+                        <h3 class="featured-title" id="home-game-title">Oyun Başlığı</h3>
+                        <p class="featured-desc" id="home-game-desc">Açıklama</p>
+                        <div class="featured-footer">
+                            <span class="platform-badge"><i class="fa-brands fa-itch-io"></i> itch.io WebGL</span>
+                            <button class="btn btn-sm btn-primary" id="home-game-play-action">
+                                <i class="fa-solid fa-play"></i> Sitede Başlat
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Öne Çıkan Video Vitrini -->
+                <div class="featured-card glass-panel" id="home-featured-video">
+                    <div class="card-badge"><i class="fa-brands fa-youtube"></i> SON YOUTUBE VİDEOSU</div>
+                    <div class="featured-cover-wrap">
+                        <img src="" alt="Video Thumbnail" class="featured-cover" id="home-video-cover">
+                        <div class="cover-overlay">
+                            <button class="play-overlay-btn" id="home-watch-video-btn">
+                                <i class="fa-solid fa-play"></i> Sinema Modunda İzle
+                            </button>
+                        </div>
+                    </div>
+                    <div class="featured-info">
+                        <div class="tags-row" id="home-video-tags"></div>
+                        <h3 class="featured-title" id="home-video-title">Video Başlığı</h3>
+                        <p class="featured-desc" id="home-video-desc">Açıklama</p>
+                        <div class="featured-footer">
+                            <span class="platform-badge"><i class="fa-solid fa-clock"></i> <span id="home-video-duration">24:18</span></span>
+                            <button class="btn btn-sm btn-secondary" onclick="switchTab('videos')">
+                                <i class="fa-solid fa-expand"></i> Sinema Modu
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Öne Çıkan Müzik Parçası -->
+                <div class="featured-card glass-panel" id="home-featured-music">
+                    <div class="card-badge"><i class="fa-solid fa-music"></i> SON BESTE</div>
+                    <div class="featured-cover-wrap">
+                        <img src="" alt="Müzik Kapağı" class="featured-cover" id="home-music-cover">
+                        <div class="cover-overlay">
+                            <button class="play-overlay-btn" id="home-play-music-btn">
+                                <i class="fa-solid fa-headphones"></i> Sitede Çal
+                            </button>
+                        </div>
+                    </div>
+                    <div class="featured-info">
+                        <div class="tags-row"><span class="tag">reefbox Originals</span><span class="tag" id="home-music-genre">Synthwave</span></div>
+                        <h3 class="featured-title" id="home-music-title">Parça Adı</h3>
+                        <p class="featured-desc" id="home-music-desc">Açıklama</p>
+                        <div class="featured-footer">
+                            <span class="platform-badge"><i class="fa-brands fa-youtube"></i> YouTube Audio Stream</span>
+                            <button class="btn btn-sm btn-glass" id="home-music-play-action">
+                                <i class="fa-solid fa-play"></i> Alt Barda Dinle
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TEKNOLOJİ & YETENEK ROZETLERİ -->
+            <div class="skills-strip glass-panel">
+                <span class="skills-label"><i class="fa-solid fa-layer-group"></i> Üretim Araçları:</span>
+                <div class="skills-tags">
+                    <span class="skill-pill"><i class="fa-solid fa-robot"></i> Godot Engine</span>
+                    <span class="skill-pill"><i class="fa-brands fa-unity"></i> Unity 3D</span>
+                    <span class="skill-pill"><i class="fa-brands fa-js"></i> Web Audio API</span>
+                    <span class="skill-pill"><i class="fa-solid fa-code"></i> C# & GDScript</span>
+                    <span class="skill-pill"><i class="fa-solid fa-wand-magic-sparkles"></i> GLSL Shaders</span>
+                    <span class="skill-pill"><i class="fa-solid fa-sliders"></i> FL Studio / Ableton</span>
+                    <span class="skill-pill"><i class="fa-brands fa-github"></i> GitHub Pages</span>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ============================================== -->
+        <!-- SEKME 2: OYUNLAR & UYGULAMALAR (itch.io GÖMÜLÜ) -->
+        <!-- ============================================== -->
+        <section id="tab-games" class="tab-panel">
+            <div class="tab-header">
+                <div>
+                    <h2 class="section-title"><i class="fa-solid fa-gamepad"></i> Oyunlar & Web Uygulamaları</h2>
+                    <p class="section-subtitle">Tüm oyunlar siteden çıkmadan doğrudan oynanabilir ve itch.io widget'ı üzerinden incelenebilir.</p>
+                </div>
+                <!-- Filtre Düğmeleri -->
+                <div class="filter-pills" id="games-filter-pills">
+                    <button class="filter-btn active" data-filter="all">Tümü</button>
+                    <button class="filter-btn" data-filter="game">Oyunlar</button>
+                    <button class="filter-btn" data-filter="app">Uygulamalar</button>
+                </div>
+            </div>
+
+            <!-- Oyun Kartları Izgarası -->
+            <div class="projects-grid" id="projects-grid-container">
+                <!-- JavaScript tarafından dinamik doldurulur -->
+            </div>
+        </section>
+
+
+        <!-- ============================================== -->
+        <!-- SEKME 3: VİDEOLAR & EĞİTİMLER (SİNEMA MODU)     -->
+        <!-- ============================================== -->
+        <section id="tab-videos" class="tab-panel">
+            <div class="tab-header">
+                <div>
+                    <h2 class="section-title"><i class="fa-brands fa-youtube"></i> Video & Eğitim Arşivi</h2>
+                    <p class="section-subtitle">Oyun geliştirme, yazılım eğitimleri ve eğlenceli oyun videolarım. Doğrudan sinema oynatıcısında izleyebilirsiniz.</p>
+                </div>
+                <!-- Filtre Butonları -->
+                <div class="filter-pills" id="videos-filter-pills">
+                    <button class="filter-btn active" data-category="all">Tümü</button>
+                    <button class="filter-btn" data-category="gaming"><i class="fa-solid fa-gamepad"></i> Oyun Videoları</button>
+                    <button class="filter-btn" data-category="education"><i class="fa-solid fa-graduation-cap"></i> Eğitimler</button>
+                </div>
+            </div>
+
+            <!-- DEV SİNEMA OYNATICI ALANI -->
+            <div class="cinema-player-container glass-panel">
+                <div class="video-iframe-wrapper">
+                    <iframe id="main-cinema-iframe" 
+                            src="https://www.youtube-nocookie.com/embed/7jvi2GSvoUA?enablejsapi=1&rel=0" 
+                            title="MİNECRAFT YARI OTOMATİK KIRIK TAŞ FARMI (KÜÇÜK)" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                            allowfullscreen>
+                    </iframe>
+                </div>
+                <div class="cinema-meta-bar">
+                    <div class="cinema-meta-left">
+                        <div class="cinema-badges">
+                            <span class="badge badge-cyan" id="cinema-category-badge">Oyun Videoları</span>
+                            <span class="badge badge-dark" id="cinema-date-badge"><i class="fa-regular fa-calendar"></i> Güncel</span>
+                            <span class="badge badge-dark" id="cinema-views-badge"><i class="fa-regular fa-eye"></i> Öne Çıkan</span>
+                        </div>
+                        <h2 class="cinema-title" id="cinema-video-title">MİNECRAFT YARI OTOMATİK KIRIK TAŞ FARMI (KÜÇÜK)</h2>
+                        <p class="cinema-desc" id="cinema-video-desc">Minecraft'ta kolay, kompakt ve pratik yarı otomatik kırık taş farmı yapımı rehberi ve oynanış videosu.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VİDEO SEÇİM LİSTESİ / IZGARA -->
+            <div class="playlist-header">
+                <h3><i class="fa-solid fa-list-ul"></i> Oynatma Listesi & Arşiv</h3>
+                <span class="playlist-count" id="videos-count-badge">5 Video</span>
+            </div>
+            <div class="videos-grid" id="videos-grid-container">
+                <!-- JavaScript tarafından dinamik doldurulur -->
+            </div>
+        </section>
+
+
+        <!-- ============================================== -->
+        <!-- SEKME 4: MÜZİKLER & DİSKOGRAFİ (AUDIO HUB)      -->
+        <!-- ============================================== -->
+        <section id="tab-music" class="tab-panel">
+            <div class="tab-header">
+                <div>
+                    <h2 class="section-title"><i class="fa-solid fa-headphones"></i> Müzikler & Orijinal Besteler</h2>
+                    <p class="section-subtitle">YouTube ses akışıyla çalışan tüm parçalarım. İstediğiniz parçaya tıklayarak alt barda kesintisiz dinleyebilirsiniz.</p>
+                </div>
+                <!-- Müzik Türü Filtreleri -->
+                <div class="filter-pills" id="music-filter-pills">
+                    <button class="filter-btn active" data-genre="all">Tümü</button>
+                    <button class="filter-btn" data-genre="Synthwave">Synthwave</button>
+                    <button class="filter-btn" data-genre="Electronic">Electronic</button>
+                    <button class="filter-btn" data-genre="Darksynth">Darksynth</button>
+                    <button class="filter-btn" data-genre="Ambient">Ambient</button>
+                </div>
+            </div>
+
+            <!-- Müzik Vitrin Spotlight Kartı -->
+            <div class="music-spotlight-card glass-panel">
+                <div class="spotlight-cover-wrap">
+                    <img src="" alt="Spotlight Albüm" id="spotlight-cover" class="spotlight-cover">
+                    <div class="spotlight-play-overlay" id="spotlight-play-trigger">
+                        <i class="fa-solid fa-play" id="spotlight-play-icon"></i>
+                    </div>
+                </div>
+                <div class="spotlight-details">
+                    <div class="spotlight-badge">
+                        <span class="status-dot"></span> <span id="spotlight-status-text">ŞU AN SEÇİLİ PARÇA</span>
+                    </div>
+                    <h2 class="spotlight-title" id="spotlight-title">Parça Adı</h2>
+                    <p class="spotlight-artist" id="spotlight-artist">reefbox</p>
+                    <p class="spotlight-desc" id="spotlight-desc">Parça açıklaması</p>
+                    <div class="spotlight-actions">
+                        <button class="btn btn-primary" id="spotlight-main-play-btn">
+                            <i class="fa-solid fa-play"></i> Hemen Dinle
+                        </button>
+                        <span class="badge badge-dark" id="spotlight-genre-badge">Synthwave</span>
+                        <span class="badge badge-dark" id="spotlight-duration-badge">3:42</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Parça Seçim Listesi (Tüm Parçalar) -->
+            <div class="playlist-header">
+                <h3><i class="fa-solid fa-list-music"></i> Tüm Parçalar & Diskografi</h3>
+                <span class="playlist-count" id="music-tracks-count-badge">4 Parça</span>
+            </div>
+            <div class="music-tracks-grid" id="music-tracks-grid-container">
+                <!-- JavaScript tarafından doldurulur -->
+            </div>
+        </section>
+
+
+        <!-- ============================================== -->
+        <!-- SEKME 5: SOSYAL MEDYA & TOPLULUK (GÖMÜLÜ)       -->
+        <!-- ============================================== -->
+        <section id="tab-socials" class="tab-panel">
+            <div class="tab-header">
+                <div>
+                    <h2 class="section-title"><i class="fa-solid fa-satellite-dish"></i> Sosyal Medya & Topluluk</h2>
+                    <p class="section-subtitle">X (Twitter), Instagram ve YouTube paylaşımlarımın canlı ve gömülü akışı.</p>
+                </div>
+            </div>
+
+            <div class="socials-layout-grid">
+                <!-- 1. SÜTUN: X (Twitter) Akışı -->
+                <div class="social-box glass-panel">
+                    <div class="social-box-header x-header">
+                        <div class="header-left">
+                            <i class="fa-brands fa-x-twitter"></i>
+                            <div>
+                                <h4>X / Twitter</h4>
+                                <span>@reefbox</span>
+                            </div>
+                        </div>
+                        <a href="https://twitter.com" target="_blank" rel="noopener" class="social-link-btn">
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        </a>
+                    </div>
+                    <div class="social-box-content twitter-feed-container">
+                        <div class="mock-tweet glass-subpanel">
+                            <div class="tweet-user">
+                                <div class="avatar-mini"><i class="fa-solid fa-cube"></i></div>
+                                <div><strong>reefbox</strong> <span class="handle">@reefbox • 2g</span></div>
+                            </div>
+                            <p class="tweet-text">Yeni itch.io oyunum "Cyber Reef: Echoes" için hazırladığım WebGL derlemesi artık yayında! Siteden hiç çıkmadan oynayabilirsiniz 🌊🕹️</p>
+                            <div class="tweet-stats"><i class="fa-regular fa-heart"></i> 64 &nbsp; <i class="fa-solid fa-retweet"></i> 18</div>
+                        </div>
+                        <div class="mock-tweet glass-subpanel">
+                            <div class="tweet-user">
+                                <div class="avatar-mini"><i class="fa-solid fa-cube"></i></div>
+                                <div><strong>reefbox</strong> <span class="handle">@reefbox • 5g</span></div>
+                            </div>
+                            <p class="tweet-text">Shader kodlamayı sevenler için yeni GLSL su kırılma eğitimi yayında. YouTube kanalından veya portfolyomdan izleyebilirsiniz! ⚡</p>
+                            <div class="tweet-stats"><i class="fa-regular fa-heart"></i> 92 &nbsp; <i class="fa-solid fa-retweet"></i> 24</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. SÜTUN: Instagram Gönderileri & Önizlemeler -->
+                <div class="social-box glass-panel">
+                    <div class="social-box-header ig-header">
+                        <div class="header-left">
+                            <i class="fa-brands fa-instagram"></i>
+                            <div>
+                                <h4>Instagram</h4>
+                                <span>@reefbox.dev</span>
+                            </div>
+                        </div>
+                        <a href="https://instagram.com" target="_blank" rel="noopener" class="social-link-btn">
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        </a>
+                    </div>
+                    <div class="social-box-content ig-feed-container" id="instagram-posts-container">
+                        <!-- JS Dinamik yükleyecek -->
+                    </div>
+                </div>
+
+                <!-- 3. SÜTUN: YouTube Kanalı & Discord Topluluğu -->
+                <div class="social-box-column">
+                    <!-- YouTube Kanal Kartı -->
+                    <div class="social-box glass-panel yt-box">
+                        <div class="social-box-header yt-header">
+                            <div class="header-left">
+                                <i class="fa-brands fa-youtube"></i>
+                                <div>
+                                    <h4>YouTube Kanalı</h4>
+                                    <span id="social-yt-subscribers">15.4K Abone</span>
+                                </div>
+                            </div>
+                            <span class="badge badge-danger">Resmi Kanal</span>
+                        </div>
+                        <div class="social-box-content">
+                            <div class="yt-preview-embed">
+                                <iframe src="https://www.youtube-nocookie.com/embed/7jvi2GSvoUA?rel=0" frameborder="0" allowfullscreen></iframe>
+                            </div>
+                            <div class="yt-actions">
+                                <div class="yt-meta">
+                                    <p>Yusuf Kaya'nın en yeni Minecraft oyunları, farm rehberleri ve oyun videoları.</p>
+                                </div>
+                                <a href="https://www.youtube.com/@yusufkayaa4687" target="_blank" rel="noopener" class="btn btn-danger btn-block">
+                                    <i class="fa-brands fa-youtube"></i> Kanala Abone Ol
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Discord Topluluk Kartı -->
+                    <div class="social-box glass-panel discord-box">
+                        <div class="social-box-header discord-header">
+                            <div class="header-left">
+                                <i class="fa-brands fa-discord"></i>
+                                <div>
+                                    <h4>Discord Topluluğu</h4>
+                                    <span>reefbox Topluluğu</span>
+                                </div>
+                            </div>
+                            <span class="badge badge-success"><span class="status-dot green"></span> 850+ Üye</span>
+                        </div>
+                        <div class="social-box-content">
+                            <p class="discord-desc">Oyun geliştiriciler, müzik yapımcıları ve meraklıların buluştuğu samimi topluluğumuza katılın.</p>
+                            <a href="https://discord.gg" target="_blank" rel="noopener" class="btn btn-discord btn-block">
+                                <i class="fa-brands fa-discord"></i> Sunucuya Katıl
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ============================================== -->
+    <!-- ITCH.IO OYUN OYNAMA VE İNDİRME MODALI (POPUP)   -->
+    <!-- ============================================== -->
+    <div class="game-modal-overlay" id="game-modal">
+        <div class="game-modal-container glass-panel">
+            <div class="game-modal-header">
+                <div class="modal-header-left">
+                    <span class="badge badge-cyan"><i class="fa-brands fa-itch-io"></i> itch.io Gömülü</span>
+                    <h3 class="modal-game-title" id="modal-game-title">Oyun Başlığı</h3>
+                </div>
+                <div class="modal-header-actions">
+                    <button class="modal-action-btn" id="modal-fullscreen-btn" title="Tam Ekran">
+                        <i class="fa-solid fa-expand"></i>
+                    </button>
+                    <button class="modal-action-btn close-btn" id="modal-close-btn" title="Kapat">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- Gömülü Oyun Çerçevesi -->
+            <div class="game-modal-body">
+                <iframe id="game-modal-iframe" src="" frameborder="0" allowfullscreen allow="autoplay; fullscreen *; geolocation; microphone; camera; midi; monetization; xr-spatial-tracking; gamepad; gyroscope; accelerometer; xr; cross-origin-isolated"></iframe>
+            </div>
+            <div class="game-modal-footer">
+                <span class="modal-footer-hint">
+                    <i class="fa-solid fa-circle-info"></i> Siteden hiç çıkmadan doğrudan oynayabilir, klavye ve fare kontrollerini kullanabilirsiniz.
+                </span>
+                <a href="#" target="_blank" rel="noopener" class="btn btn-sm btn-glass" id="modal-itch-direct-link">
+                    <i class="fa-brands fa-itch-io"></i> itch.io Sayfasını Gör
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================== -->
+    <!-- SABİT ALT BAR MÜZİK ÇALAR (PERSISTENT AUDIO)   -->
+    <!-- ============================================== -->
+    <div class="bottom-music-bar glass-panel" id="floating-audio-player">
+        <!-- Gizli YouTube IFrame API Oynatıcısı (Ses motoru) -->
+        <div id="hidden-youtube-player" style="position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none;"></div>
+
+        <div class="player-inner">
+            <!-- 1. Parça Bilgisi (Sol) -->
+            <div class="player-track-info">
+                <img src="" alt="Albüm Kapağı" class="player-cover" id="player-cover-img">
+                <div class="track-text">
+                    <div class="track-title-wrap">
+                        <span class="track-title" id="player-title">Parça Seçilmedi</span>
+                    </div>
+                    <span class="track-artist" id="player-artist">reefbox</span>
+                </div>
+            </div>
+
+            <!-- 2. Kontrol Düğmeleri ve İlerleme Çubuğu (Orta) -->
+            <div class="player-controls-container">
+                <div class="player-buttons">
+                    <button class="ctrl-btn" id="btn-prev" title="Önceki Parça">
+                        <i class="fa-solid fa-backward-step"></i>
+                    </button>
+                    <button class="ctrl-btn play-pause-btn" id="btn-play-pause" title="Oynat / Duraklat">
+                        <i class="fa-solid fa-play" id="play-icon"></i>
+                    </button>
+                    <button class="ctrl-btn" id="btn-next" title="Sonraki Parça">
+                        <i class="fa-solid fa-forward-step"></i>
+                    </button>
+                </div>
+
+                <!-- İlerleme Çubuğu (Scrubber) -->
+                <div class="scrubber-row">
+                    <span class="time-label" id="current-time">0:00</span>
+                    <div class="progress-bar-container" id="progress-container">
+                        <div class="progress-bar-fill" id="progress-fill"></div>
+                        <div class="progress-thumb" id="progress-thumb"></div>
+                    </div>
+                    <span class="time-label" id="total-duration">0:00</span>
+                </div>
+            </div>
+
+            <!-- 3. Ses ve Çalma Listesi Açma (Sağ) -->
+            <div class="player-aux-controls">
+                <div class="volume-container">
+                    <button class="ctrl-btn btn-icon-only" id="btn-mute-toggle" title="Sesi Aç/Kapat">
+                        <i class="fa-solid fa-volume-high" id="volume-icon"></i>
+                    </button>
+                    <input type="range" min="0" max="100" value="80" class="volume-slider" id="volume-slider" title="Ses Seviyesi">
+                </div>
+                <button class="ctrl-btn btn-playlist-toggle" id="btn-playlist-toggle" title="Çalma Listesi">
+                    <i class="fa-solid fa-bars-staggered"></i>
+                    <span class="playlist-label">Liste</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Açılır Çalma Listesi Çekmecesi (Drawer) -->
+        <div class="playlist-drawer glass-panel" id="playlist-drawer">
+            <div class="playlist-drawer-header">
+                <h4><i class="fa-solid fa-music"></i> reefbox Parça Listesi</h4>
+                <button class="ctrl-btn btn-icon-only" id="btn-close-playlist">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="playlist-tracks" id="playlist-items-container">
+                <!-- JS tarafından doldurulacak -->
+            </div>
+        </div>
+    </div>
+
+    <!-- YouTube IFrame API Scripti -->
+    <script src="https://www.youtube.com/iframe_api"></script>
+
+    <!-- Veri Dosyası -->
+    <script src="data.js"></script>
+
+    <!-- Ana Uygulama Mantığı -->
+    <script src="app.js"></script>
+</body>
+</html>
