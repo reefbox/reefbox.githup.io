@@ -99,7 +99,7 @@ const REEFBOX_DATA = {
         },
         {
             id: "vid-1",
-            title: "Godot 4.3 ile Sıfırdan 2D Cyberpunk Oyunu Geliştirme",
+            title: "minecraft",
             category: "education",
             categoryName: "Eğitimler",
             description: "Karakter hareket fiziği, animasyon state machine ve dinamik ışıklandırma sistemlerini baştan sona kodluyoruz.",
