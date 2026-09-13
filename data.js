@@ -97,19 +97,7 @@ const REEFBOX_DATA = {
             tags: ["Minecraft", "Oyun", "Farm", "Gameplay"],
             isFeatured: true
         },
-        {
-            id: "vid-1",
-            title: "minecraft",
-            category: "education",
-            categoryName: "Eğitimler",
-            description: "Karakter hareket fiziği, animasyon state machine ve dinamik ışıklandırma sistemlerini baştan sona kodluyoruz.",
-            youtubeId: "=7jvi2GSvoUA",
-            duration: "24:18",
-            views: "18.4K",
-            date: "Eylül 2026",
-            tags: ["Godot", "Game Dev", "C# / GDScript"],
-            isFeatured: false
-        },
+       
         {
             id: "vid-2",
             title: "Minecraft ile Hayatta Kalma ve Otomatik Çiftlikler",
